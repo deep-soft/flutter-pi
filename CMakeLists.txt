@@ -41,6 +41,7 @@ option(BUILD_RAW_KEYBOARD_PLUGIN "Include the raw keyboard plugin in the finishe
 option(BUILD_TEST_PLUGIN "Include the test plugin in the finished binary. Allows testing platform channel communication." OFF)
 option(BUILD_OMXPLAYER_VIDEO_PLAYER_PLUGIN "Include the omxplayer_video_player plugin in the finished binary. Allows for hardware accelerated video playback in flutter using omxplayer." OFF)
 option(BUILD_GSTREAMER_VIDEO_PLAYER_PLUGIN "Include the gstreamer_video_player plugin in the finished binary. Allows for more stable, hardware accelerated video playback in flutter using gstreamer." ON)
+option(BUILD_CAMERA_PLUGIN "Include the camera plugin in the finished binary. Requires libcamera. Allows using the `camera` flutter package with flutter-pi." ON)
 option(ENABLE_OPENGL "Build with EGL/OpenGL rendering support." ON)
 option(TRY_ENABLE_OPENGL "Don't throw an error if EGL/OpenGL aren't found, instead just build without EGL/OpenGL support in that case." ON)
 option(ENABLE_VULKAN "Build with Vulkan rendering support." OFF)
@@ -321,6 +322,15 @@ if (BUILD_GSTREAMER_VIDEO_PLAYER_PLUGIN)
     ${LIBGSTREAMER_ALLOCATORS_CFLAGS}
     ${LIBGSTREAMER_VIDEO_CFLAGS}
   )
+endif()
+if (BUILD_CAMERA_PLUGIN)
+  pkg_check_modules(LIBCAMERA REQUIRED libcamera)
+
+  target_sources(flutter-pi PRIVATE src/plugins/camera/plugin.cpp)
+  target_compile_definitions(flutter-pi PRIVATE "BUILD_CAMERA_PLUGIN")
+  target_link_libraries(flutter-pi ${LIBCAMERA_LDFLAGS})
+  target_include_directories(flutter-pi PRIVATE ${LIBCAMERA_INCLUDE_DIRS})
+  target_compile_options(flutter-pi PRIVATE ${LIBCAMERA_CFLAGS})
 endif()
 
 # Needed so dart VM can actually resolve symbols in the same
