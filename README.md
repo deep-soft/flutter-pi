@@ -1,6 +1,5 @@
 ## 📰 NEWS
-- There's now a new video player based on gstreamer. See [gstreamer video player](#gstreamer-video-player) section.
-- The new latest flutter gallery commit for flutter 3.0 is `1dfcd617a260e4468f0883d7dfbfdfe3d021f7b3`
+- The gstreamer video player dependencies have been updated. If the playback fails to initialize, see the [gstreamer video player](#gstreamer-video-player) section.
 
 # flutter-pi
 A light-weight Flutter Engine Embedder for Raspberry Pi. Inspired by https://github.com/chinmaygarde/flutter_from_scratch.
@@ -64,7 +63,7 @@ If you encounter issues running flutter-pi on any of the supported platforms lis
 
     If you want to use the [gstreamer video player](#gstreamer-video-player), install these too:
     ```shell
-    $ sudo apt install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad gstreamer1.0-libav
+    $ sudo apt install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-alsa
     ```
     <details>
       <summary>More Info</summary>
